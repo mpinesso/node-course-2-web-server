@@ -2,6 +2,11 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+// process.env contiene tutte le variabili ambientali del PC
+// questa riga di codice consente all'applicazione di funzionare sia su HEROKU (o qualsiasi altro cloud application platform)
+// sia in locale, in quando andiamo a settare la porta su cui poter richiamare la nostra applicazione e
+// dato che in locale non abbiamo la variabile locale PORT, setteremo la variabile port a 3000 di default
+const port = process.env.PORT || 3000;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -56,6 +61,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
